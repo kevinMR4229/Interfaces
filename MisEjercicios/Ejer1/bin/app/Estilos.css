@@ -1,0 +1,28 @@
+
+.root{
+    -color-salir: #fc3d21;
+    -color-guardar: "green";
+}
+
+
+
+#btn-salir{
+    -fx-background-color: -color-salir;
+}
+
+#btn-guardar{
+    -fx-background-color: -color-guardar;
+}
+
+#titulo{
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.campos{
+    -fx-font-weight: bold;
+}
+
+#msg-errores{
+    -fx-text-fill: -color-salir;
+}

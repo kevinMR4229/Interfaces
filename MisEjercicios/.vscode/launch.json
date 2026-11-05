@@ -1,13 +1,7 @@
 {
   "version": "0.2.0",
   "configurations": [
-    {
-        "type": "java",
-        "name": "App",
-        "request": "launch",
-        "mainClass": "app.App",
-        "projectName": "MisEjercicios_dd206c7f"
-    },
+    
     {
         "type": "java",
         "name": "Escuela",
