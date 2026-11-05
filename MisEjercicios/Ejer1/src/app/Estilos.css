@@ -1,0 +1,15 @@
+
+.root{
+    -color-salir: #fc3d21;
+}
+
+
+
+#btn-entrar{
+    -fx-background-color: -color-salir
+}
+
+#titulo{
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}

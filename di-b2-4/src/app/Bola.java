@@ -12,6 +12,8 @@ public class Bola extends Circle {
         getStyleClass().add("bola");
     }
 
+    
+
     /** Cambia el relleno de la bola por un color aleatorio. */
     public void colorAleatorio() {
         setFill(Color.hsb(Math.random() * 360, 0.7, 0.95));

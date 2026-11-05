@@ -54,9 +54,16 @@ public class Main extends Application {
 
         // TODO T1: crear bolas con un clic y mostrar la posición del ratón
         zona.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY) {
+            if (e.getButton() == MouseButton.PRIMARY  && e.isStillSincePress()) {
                 crearBola(e.getX(), e.getY());
-            } 
+
+                System.out.println("Clic en la posición " + e.getX() + ", " + e.getY());
+                System.out.println("Botón del ratón: " + e.getButton());
+            } else if (e.getButton() == MouseButton.SECONDARY) {
+                System.out.println("Clic en la posición " + e.getX() + ", " + e.getY());
+                System.out.println("Botón del ratón: " + e.getButton());
+            }
+
         });
 
         // TODO T4: teclas C y Supr
@@ -70,16 +77,23 @@ public class Main extends Application {
     /** Crea una bola en (x, y), le asigna sus manejadores y la añade a la zona. */
     private void crearBola(double x, double y) {
         Bola bola = new Bola(x, y);
-        
 
         // TODO T2: clic en una bola (cambiar color o eliminar)
         bola.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY) {
+            if (e.getButton() == MouseButton.PRIMARY && e.isStillSincePress()) {
                 bola.colorAleatorio();
-            } 
-        });    
+                e.consume();
+            }else if(e.getButton() == MouseButton.SECONDARY){
+                zona.getChildren().remove(bola);
+            }
+
+        });
 
         // TODO T3: arrastrar la bola
+        bola.setOnMouseDragged(e -> {
+            bola.setCenterX(e.getX());
+            bola.setCenterY(e.getY());
+        });
 
         zona.getChildren().add(bola);
         actualizar();

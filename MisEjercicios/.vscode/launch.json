@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "java",
+        "name": "App",
+        "request": "launch",
+        "mainClass": "app.App",
+        "projectName": "MisEjercicios_dd206c7f"
+    },
+    {
+        "type": "java",
+        "name": "Escuela",
+        "request": "launch",
+        "mainClass": "app.App",
+        "vmArgs": "--module-path \"F:\\Interfaces\\javafx-sdk-25.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
+    },
+    {
+        "type": "java",
+        "name": "Casa",
+        "request": "launch",
+        "mainClass": "app.App",
+        "vmArgs": "--module-path \"E:\\Programacion\\Java\\Escuela\\Interfaces\\javafx-sdk-25.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
+    }
+]
+}
