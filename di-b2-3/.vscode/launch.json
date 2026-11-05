@@ -3,17 +3,17 @@
   "configurations": [
     {
       "type": "java",
-      "name": "PanelPan",
+      "name": "Escuela",
       "request": "launch",
-      "mainClass": "app.PanelPan",
+      "mainClass": "app.Main",
       "vmArgs": "--module-path \"F:\\Interfaces\\javafx-sdk-25.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
     },
     {
       "type": "java",
-      "name": "JavaFX",
+      "name": "Casa",
       "request": "launch",
       "mainClass": "app.Main",
-      "vmArgs": "--module-path \"F:\\Interfaces\\javafx-sdk-25.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
+      "vmArgs": "--module-path \"E:\\Programacion\\Java\\Escuela\\Interfaces\\javafx-sdk-25.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
     }
   ]
 }
