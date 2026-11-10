@@ -39,9 +39,10 @@ class Validador{
             errores.add(new Error("edad", "No puede estar vacio"));
         }else {
             try{
-                if (Integer.parseInt(edad) <=0) {
-                errores.add(new Error("edad", "La edad no puede ser menor o igual a cero"));
+                if (Integer.parseInt(edad) <18) {
+                errores.add(new Error("edad", "Debe ser mayor de edad"));
                 }   
+
             }catch(NumberFormatException ex){
                 errores.add(new Error("edad", "La edad debe ser un numero"));
             }

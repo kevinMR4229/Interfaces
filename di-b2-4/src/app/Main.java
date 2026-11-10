@@ -21,6 +21,9 @@ public class Main extends Application {
     private final Pane zona = new Pane();
     private final Label lblRaton = new Label("Ratón: —");
     private final Label lblBolas = new Label();
+    private final Label lblcolores = new Label("Cambios de color: 0");
+    private int contador;
+
 
     @Override
     public void start(Stage stage) {
@@ -39,9 +42,11 @@ public class Main extends Application {
         btnBorrar.setOnAction(e -> borrarTodo());
         lblRaton.setId("lblRaton");
         lblBolas.setId("lblBolas");
+        lblcolores.setId("lblcolores");
+        lblcolores.setStyle("-fx-text-fill: black;");
         Region espacio = new Region();
         HBox.setHgrow(espacio, Priority.ALWAYS);
-        HBox barra = new HBox(20, lblRaton, lblBolas, espacio, btnBorrar);
+        HBox barra = new HBox(20, lblRaton, lblBolas, lblcolores, espacio, btnBorrar);
         barra.getStyleClass().add("barra-estado");
         barra.setAlignment(Pos.CENTER_LEFT);
 
@@ -52,9 +57,13 @@ public class Main extends Application {
         Scene scene = new Scene(raiz);
         scene.getStylesheets().add(getClass().getResource("bolas.css").toExternalForm());
 
+        zona.setOnMouseMoved(e -> {
+            lblRaton.setText(String.format("Raton: %.0f, %.0f", e.getX(), e.getY()));
+        });
+
         // TODO T1: crear bolas con un clic y mostrar la posición del ratón
         zona.setOnMouseClicked(e -> {
-            if (e.getButton() == MouseButton.PRIMARY  && e.isStillSincePress()) {
+            if (e.getButton() == MouseButton.PRIMARY && e.isStillSincePress()) {
                 crearBola(e.getX(), e.getY());
 
                 System.out.println("Clic en la posición " + e.getX() + ", " + e.getY());
@@ -67,6 +76,17 @@ public class Main extends Application {
         });
 
         // TODO T4: teclas C y Supr
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.C) {
+                for (Node n : zona.getChildren()) {
+                    ((Bola) n).colorAleatorio();
+                }
+                contador++;
+                lblcolores.setText("CambiosColores:" + contador);
+            }else if (e.getCode() == KeyCode.DELETE) {
+                borrarTodo();
+            }
+        });
 
         actualizar();
         stage.setTitle("B2.4 — Bolas interactivas");
@@ -83,7 +103,7 @@ public class Main extends Application {
             if (e.getButton() == MouseButton.PRIMARY && e.isStillSincePress()) {
                 bola.colorAleatorio();
                 e.consume();
-            }else if(e.getButton() == MouseButton.SECONDARY){
+            } else if (e.getButton() == MouseButton.SECONDARY) {
                 zona.getChildren().remove(bola);
             }
 
@@ -109,6 +129,7 @@ public class Main extends Application {
     private void actualizar() {
         lblBolas.setText("Bolas: " + zona.getChildren().size());
     }
+
 
     public static void main(String[] args) {
         launch(args);
