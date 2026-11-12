@@ -89,12 +89,41 @@ public class Main extends Application {
         raiz.getStyleClass().add("contenido");
 
         // TODO T1: contador de caracteres del nombre (máximo 30)
+        txtNombre.textProperty().addListener((obs, viejo, nuevo) -> {
+            lblContador.setText(nuevo.length() + "/" + MAX_NOMBRE);
+            if (nuevo.length() > 30) {
+                txtNombre.setText(viejo);
+            }
+            actualizarBoton();
+        });
 
         // TODO T2: comprobar el correo mientras se escribe
+        txtCorreo.textProperty().addListener((obs, viejo, nuevo) -> {
+            if (nuevo.isEmpty()) {
+                mostrarAyuda(lblCorreo, "", null);
+            } else if (correoValido(nuevo)) {
+                mostrarAyuda(lblCorreo, "Correo OK", "correcto");
+                txtCorreo.pseudoClassStateChanged(ERROR, false);
+            } else {
+                mostrarAyuda(lblCorreo, "Correo No OK", "incorreto");
+                txtCorreo.pseudoClassStateChanged(ERROR, true);
+            }
+            actualizarBoton();
+        });
 
         // TODO T3: recalcular el total al cambiar la cuota o la piscina
+        grupoCuota.selectedToggleProperty().addListener((obs) -> {
+            calcularTotal();
+        });
+        chkPiscina.selectedProperty().addListener((obs) -> {
+            calcularTotal();
+        });
 
         // TODO T4: Registrar solo se habilita con los datos completos
+        chkCondiciones.selectedProperty().addListener((obs) -> {
+            actualizarBoton();
+        });
+
 
         calcularTotal();
         actualizarBoton();
@@ -106,9 +135,19 @@ public class Main extends Application {
         stage.show();
     }
 
-    /** Habilita «Registrar» solo si el nombre no está vacío, el correo es válido y se aceptan las condiciones. */
+    /**
+     * Habilita «Registrar» solo si el nombre no está vacío, el correo es válido y
+     * se aceptan las condiciones.
+     */
     private void actualizarBoton() {
         // TODO T4 (continuación, ver enunciado)
+        if (txtNombre.getText().isEmpty() || !correoValido(txtCorreo.getText()) || !chkCondiciones.isSelected()) {
+            btnRegistrar.setDisable(true);
+        }else{
+            btnRegistrar.setDisable(false);
+        }
+        
+        
     }
 
     // =========================================================
@@ -123,7 +162,9 @@ public class Main extends Application {
         return rb;
     }
 
-    /** Calcula el total mensual (cuota elegida + piscina) y lo muestra en lblTotal. */
+    /**
+     * Calcula el total mensual (cuota elegida + piscina) y lo muestra en lblTotal.
+     */
     private void calcularTotal() {
         int total = 0;
         if (grupoCuota.getSelectedToggle() != null) {
@@ -140,7 +181,10 @@ public class Main extends Application {
         return texto.matches("[\\w.-]+@[\\w-]+(\\.[\\w-]+)+");
     }
 
-    /** Cambia el texto de una etiqueta de ayuda y le deja solo la clase indicada (o ninguna si es null). */
+    /**
+     * Cambia el texto de una etiqueta de ayuda y le deja solo la clase indicada (o
+     * ninguna si es null).
+     */
     private void mostrarAyuda(Label etiqueta, String texto, String clase) {
         etiqueta.setText(texto);
         etiqueta.getStyleClass().removeAll("correcto", "incorrecto");
