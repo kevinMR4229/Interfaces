@@ -1,7 +1,9 @@
 
 .root{
-    -color-salir: #fc3d21;
-    -color-guardar: "green";
+    -color-error: hsl(8, 97%, 56%);
+    -color-guardar: #199817;
+    -color-guardar-hover: #25fc21;
+    -color-fondo: #767575;
 }
 
 
@@ -14,6 +16,10 @@
     -fx-background-color: -color-guardar;
 }
 
+#btn-guardar:hover{
+    -fx-background-color: -color-guardar-hover;
+}
+
 #titulo{
     -fx-font-size: 22px;
     -fx-font-weight: bold;
@@ -23,6 +29,15 @@
     -fx-font-weight: bold;
 }
 
+.campos-entrada{
+    -fx-border-radius: 20px;
+}
+
 #msg-errores{
-    -fx-text-fill: -color-salir;
+    -fx-text-fill: -color-error;
+}
+
+#contenedor-pantalla{
+    -fx-background-color: -color-fondo;
+    -fx-padding: 20px;
 }

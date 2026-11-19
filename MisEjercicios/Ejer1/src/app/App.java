@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -84,7 +85,7 @@ public class App extends Application{
         TextField tfNombre = new TextField();
 
         Label ledad = new Label("Edad");
-        TextField tfedad = new TextField();
+        TextField tfEdad = new TextField();
 
         Label lcurso = new Label("Curso");
         ComboBox cbCurso = new ComboBox<>();
@@ -116,7 +117,7 @@ public class App extends Application{
             mensajeErrores.setText("");
 
             String nombre = tfNombre.getText().trim();
-            String edad = tfedad.getText().trim();
+            String edad = tfEdad.getText().trim();
             Optional<Object> curso = Optional.ofNullable(cbCurso.getValue());
             RadioButton turno = (RadioButton) toggleGroup.getSelectedToggle(); 
             boolean confirmacion = cbConfirmacion.isSelected();
@@ -147,12 +148,14 @@ public class App extends Application{
 
 
         //Boxes
-        VBox nombre = new VBox(3, lNombre, tfNombre);
-        VBox edad = new VBox(3, ledad, tfedad);
-        VBox curso = new VBox(3, lcurso, cbCurso);
-        HBox horarios = new HBox(btnMañana, btnTarde);
+        VBox boxNombre = new VBox(3, lNombre, tfNombre);
+        VBox boxEdad = new VBox(3, ledad, tfEdad);
+        VBox boxCurso = new VBox(3, lcurso, cbCurso);
+        HBox boxHorarios = new HBox(btnMañana, btnTarde);
 
-        VBox raiz = new VBox(5, titulo, nombre, edad, curso, lTurno, horarios, cbConfirmacion, btnGuardar, mensajeErrores);
+        VBox raiz = new VBox(5, titulo, boxNombre, boxEdad, boxCurso, lTurno, boxHorarios, cbConfirmacion, btnGuardar, mensajeErrores);
+        //raiz.setPadding(new Insets(20));
+        
 
 
 
@@ -166,11 +169,17 @@ public class App extends Application{
         //btnSalir.setId("btn-salir");
         btnGuardar.setId("btn-guardar");
         titulo.setId("titulo");
-        nombre.getStyleClass().add("campos");
-        edad.getStyleClass().add("campos");
-        curso.getStyleClass().add("campos");
+
+        boxNombre.getStyleClass().add("campos");
+        boxEdad.getStyleClass().add("campos");
+        boxCurso.getStyleClass().add("campos");
         lTurno.getStyleClass().add("campos");
+
+        tfNombre.getStyleClass().add("campos-entrada");
+        tfEdad.getStyleClass().add("campos-entrada");
+
         mensajeErrores.setId("msg-errores");
+        raiz.setId("contenedor-pantalla");
 
 
 
