@@ -60,6 +60,28 @@ public class PantallaLogin extends Pantalla {
         //   Se comprueba: 16 dígitos en txtTarjeta -> foco en txtPin; Enter -> mismo efecto que btnAceptar;
         //   Esc -> txtTarjeta y txtPin vacíos y foco en txtTarjeta (método limpiar()).
 
+        txtTarjeta.textProperty().addListener((obs, anterior, actual) -> {
+            if (actual.length() == 16) {
+                txtPin.requestFocus();
+            }
+        });
+
+        txtPin.textProperty().addListener((obs, anterior, actual) -> {
+            if (actual.length() == 4) {
+                btnAceptar.requestFocus();
+            }
+        });
+
+        addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.ESCAPE) {
+                limpiar();
+                e.consume();
+                txtTarjeta.requestFocus();
+            }else if(e.getCode() == KeyCode.ENTER){
+                aceptar();
+                e.consume();
+            }
+        });
 
         // TODO C1.1 — FIN
 

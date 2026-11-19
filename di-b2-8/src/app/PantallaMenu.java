@@ -5,6 +5,9 @@ import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -57,12 +60,22 @@ public class PantallaMenu extends Pantalla {
         GridPane menuOperaciones = new GridPane();
         menuOperaciones.getStyleClass().add("menuOperaciones");
         menuOperaciones.setId("menuOperaciones");
+        ColumnConstraints c0 = new ColumnConstraints();
+        c0.setPercentWidth(50);
+        ColumnConstraints c1 = new ColumnConstraints();
+        c1.setPercentWidth(50);
         menuOperaciones.add(btnIngresar,0,0);
+        btnIngresar.setMaxWidth(Double.MAX_VALUE);
         menuOperaciones.add(btnRetirar,1,0);
+        btnRetirar.setMaxWidth(Double.MAX_VALUE);
         menuOperaciones.add(btnSaldo,0,1);
+        btnSaldo.setMaxWidth(Double.MAX_VALUE);
         menuOperaciones.add(btnCambiarPin,1,1);
-        menuOperaciones.add(btnSalir,0,2);
-        menuOperaciones.setColumnSpan(btnSalir, 2);
+        btnCambiarPin.setMaxWidth(Double.MAX_VALUE);
+        menuOperaciones.add(btnSalir,0,2,2,1);
+        btnSalir.setMaxWidth(Double.MAX_VALUE);
+        
+
         VBox formulario = new VBox();
         formulario.getChildren().addAll(terminal,menuOperaciones);
         setCenter(formulario);
@@ -74,6 +87,21 @@ public class PantallaMenu extends Pantalla {
         // TODO C2.1 — INICIO: Teclas del menú (apartado C2)
         //   Se comprueba: DIGIT1..DIGIT5 y NUMPAD1..NUMPAD5 tienen el mismo efecto que
         //   btnIngresar, btnRetirar, btnSaldo, btnCambiarPin y btnSalir; Enter, el del botón con el foco.
+
+        
+        addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.getCode() == KeyCode.DIGIT1 || e.getCode() == KeyCode.NUMPAD1) {
+                btnIngresar.fire();        
+            }else if(e.getCode() == KeyCode.DIGIT2 || e.getCode() == KeyCode.NUMPAD2){
+                btnRetirar.fire();
+            }else if(e.getCode() == KeyCode.DIGIT3 || e.getCode() == KeyCode.NUMPAD3){
+                btnSaldo.fire();
+            }else if(e.getCode() == KeyCode.DIGIT4 || e.getCode() == KeyCode.NUMPAD4){
+                cambiarPin();
+            }else if(e.getCode() == KeyCode.DIGIT4 || e.getCode() == KeyCode.NUMPAD4){
+                btnSalir.fire();
+            }
+        });
 
 
         // TODO C2.1 — FIN

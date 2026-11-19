@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "JavaFX",
+      "request": "launch",
+      "mainClass": "app.Main",
+      "vmArgs": "--module-path \"F:\\Interfaces\\javafx-sdk-25.0.5\\lib\" --add-modules javafx.controls,javafx.fxml"
+    }
+  ]
+}

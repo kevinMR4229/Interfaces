@@ -168,7 +168,7 @@ public class Main extends Application {
         // TODO A1.3 — INICIO: Colocar la pantalla recibida en la zona central (apartado A1)
         //   Se comprueba: la pantalla recibida (clase "pantalla") es la única pantalla del marco y ocupa el centro.
         marco.getChildren().removeIf(n -> n instanceof Pantalla);
-        marco.getChildren().add(p);
+        marco.setCenter(p);
         // TODO A1.3 — FIN
 
         // TODO D1.2 — INICIO: Foco inicial al mostrar una pantalla (apartado D1)
