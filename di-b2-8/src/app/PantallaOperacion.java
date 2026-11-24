@@ -70,7 +70,7 @@ public class PantallaOperacion extends Pantalla {
             });
             // TODO D2.2 — INICIO: Los importes rápidos no reciben el foco (apartado D2)
             //   Se comprueba: los botones con clase "importe-rapido" (ids rapido20 … rapido500) no reciben el foco.
-
+            b.setFocusTraversable(false);
 
             // TODO D2.2 — FIN
             rapidos[i] = b;
@@ -97,6 +97,13 @@ public class PantallaOperacion extends Pantalla {
 
         // TODO C3.1 — INICIO: Importe marcado como erróneo mientras se escribe (apartado C3)
         //   Nombres que usan los tests: pseudo-clase "error" (constante ERROR) en txtImporte; usa validar(texto).
+        txtImporte.textProperty().addListener((obs, viejo, nuevo)->{
+            if (validar(nuevo)!=null) {
+                txtImporte.pseudoClassStateChanged(ERROR, true);   
+            }else{
+                txtImporte.pseudoClassStateChanged(ERROR, true); 
+            }
+        });
 
 
         // TODO C3.1 — FIN
@@ -125,6 +132,9 @@ public class PantallaOperacion extends Pantalla {
         }
         if (!ingreso && cantidad > banco.getSaldoActual()) {
             return "Fondos insuficientes.";
+        }
+        if (!ingreso && cantidad > 300) {
+            
         }
         return null;
     }
@@ -162,7 +172,7 @@ public class PantallaOperacion extends Pantalla {
     private void volverAlImporte() {
         // TODO D2.3 — INICIO: Devolver el foco al importe tras un aviso (apartado D2)
         //   Se comprueba: foco en txtImporte con todo su texto seleccionado.
-
+        txtImporte.requestFocus();
 
         // TODO D2.3 — FIN
     }
@@ -171,7 +181,7 @@ public class PantallaOperacion extends Pantalla {
     public void enfocar() {
         // TODO D1.5 — INICIO: Foco inicial de la operación (apartado D1)
         //   Se comprueba: foco en txtImporte.
-
+        txtImporte.requestFocus();
 
         // TODO D1.5 — FIN
     }

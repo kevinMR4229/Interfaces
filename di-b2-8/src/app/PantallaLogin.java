@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -117,6 +118,13 @@ public class PantallaLogin extends Pantalla {
         // Provisional: solo entra si los datos son correctos, sin avisar de nada
         if (banco.login(txtTarjeta.getText(), txtPin.getText()) == Banco.ResultadoLogin.CORRECTO) {
             app.iniciarSesion();
+        }else if(banco.login(txtTarjeta.getText(), txtPin.getText()) == Banco.ResultadoLogin.INCORRECTO){
+            app.alerta(AlertType.ERROR, "Error acceso", "Tarjeta o PIN no valido. Intentos restantes: " + banco.getIntentosRestantes());
+            txtPin.clear();
+            txtPin.requestFocus();
+        }else{
+            app.alerta(AlertType.ERROR, "Bloqueo tarjeta", "Tarjeta bloqueada. Acuda a sucursal de Springfield");
+            limpiar();
         }
         // TODO E1.1 — FIN
     }
@@ -131,7 +139,7 @@ public class PantallaLogin extends Pantalla {
     public void enfocar() {
         // TODO D1.3 — INICIO: Foco inicial de la identificación (apartado D1)
         //   Se comprueba: foco en txtTarjeta.
-
+        txtTarjeta.requestFocus();
 
         // TODO D1.3 — FIN
     }

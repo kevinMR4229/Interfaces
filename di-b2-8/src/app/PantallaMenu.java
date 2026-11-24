@@ -124,7 +124,7 @@ public class PantallaMenu extends Pantalla {
     public void enfocar() {
         // TODO D1.4 — INICIO: Foco inicial del menú (apartado D1)
         //   Se comprueba: foco en btnIngresar.
-
+        btnIngresar.requestFocus();
 
         // TODO D1.4 — FIN
     }

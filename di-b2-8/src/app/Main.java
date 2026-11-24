@@ -98,6 +98,9 @@ public class Main extends Application {
         //   Nombres que usan los tests:
         //   - etiqueta lblFoco (id "lblFoco"): texto "Foco: <id> (<Tipo>)", generado con describir(nodo)
         //   - foco inicial con el método enfocar() de cada pantalla (TODO D1.2 a D1.5)
+        scene.focusOwnerProperty().addListener((obs, viejo, nuevo)->{
+            lblFoco.setText(describir(nuevo));
+        });
 
 
         // TODO D1.1 — FIN
@@ -117,7 +120,7 @@ public class Main extends Application {
 
         // TODO D3.1 — INICIO: Atajo F1 para la ayuda (apartado D3)
         //   Se comprueba: F1, con el foco en cualquier control y en cualquier pantalla, llama a mostrarAyuda().
-
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.F1), this::mostrarAyuda);
 
         // TODO D3.1 — FIN
 
@@ -173,7 +176,7 @@ public class Main extends Application {
 
         // TODO D1.2 — INICIO: Foco inicial al mostrar una pantalla (apartado D1)
         //   Se comprueba: tras mostrar una pantalla, el foco queda en el control que indica su método enfocar().
-
+        Platform.runLater(p::enfocar);
 
         // TODO D1.2 — FIN
         actualizarInspector();
